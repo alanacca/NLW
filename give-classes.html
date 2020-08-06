@@ -18,6 +18,8 @@
 
         <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;700&amp;family=Poppins:wght@400;600&amp;display=swap" rel="stylesheet">
 
+        <script src="/scripts/addField.js" defer></script>
+
     </head>
 
     <body id="page-give-classes"> 
@@ -90,9 +92,9 @@
                         </div>
                    </fieldset>
 
-                   <fieldset>
+                   <fieldset id="schedule-items">
                        <legend>Horários Disponíveis
-                           <button id="add-time">+ Novo Horário</button>
+                           <button type="button" id="add-time">+ Novo Horário</button>
                        </legend>
 
                        <div class="schedule-item">
@@ -134,6 +136,12 @@
                 </footer>
             </main>
         </div>
+
+        <!--Escrevendo em javaScript: no local do traço a gente coloca a letra seguinte do traço em maiuscula. Como mostrado no background-color
+        <script> 
+            document.querySelector("#container").style.backgroundColor = "red";
+        </script>
+        -->
 
     </body>
 

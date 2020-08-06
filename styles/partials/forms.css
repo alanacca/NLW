@@ -32,6 +32,7 @@
     position: relative; /*Para que o positin absolute identifique onde está o pai dele, que é onde ele deve ficar*/
 }
 
+/*Colocar linha nos inputa para indicar onde está selecionado*/
 .input-block:focus-within::after,
 .textarea-block:focus-within::after {
     content: "";/*Obrigatório*/
