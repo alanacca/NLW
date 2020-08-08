@@ -1,3 +1,6 @@
+
+//DADOS
+
 const proffys = [//cada professor é um objeto, por causa das "{}", dentro de uma lista de objetos, por causa dos "[]", chamada proffys
     {
         name: "Diego Fernandes", 
@@ -48,6 +51,16 @@ const subjects = [
     "Português", 
     "Química", 
 ]
+
+const weekdays = [
+    "Domingo",
+    "Segunda-feira",
+    "Terça-feira",
+    "Quarta-feira",
+    "Quinta-feira",
+    "Sexta-feira",
+    "Sábado",
+]
 /*
 function pageStudy(req, res) {
     return res.sendFile(__dirname + "/views/study.html")
@@ -57,18 +70,43 @@ function pageGiveClasses(req, res) {
     return res.sendFile(__dirname + "/views/give-classes.html")
 }*/
 
+//FUNCIONALIDADES
+
+function getSubject(subjectNumber) {
+    const position = +subjectNumber-1
+    return subjects[position]
+}
+
 function pageLanding(req, res) {
     return res.render("index.html")
 }
 
-function pageStudy(req, res) {
+function pageStudy(req , res) {
     const filters = req.query
-    return res.render("study.html", {proffys, filters})
+    return res.render("study.html", {proffys, filters,subjects, weekdays})
 }
 
 function pageGiveClasses(req, res) {
-    return res.render("give-classes.html")
+    const data = req.query
+
+    //transformando em um array e verificando quantos elementos tem nesse array
+    //se tiver dados
+    const isNotEmpty = Object.keys(data).length > 0
+    
+    if(isNotEmpty) {
+
+        data.subject = getSubject(data.subject)
+
+        //adicionar dados a lista de proffys
+        proffys.push(data)
+
+        return res.redirect("/study")//Quando adicionar um novo professor, vai redirecionar para a página study
+    }
+    //se não, mostrar a página
+    return res.render("give-classes.html", {subjects, weekdays})
 }
+
+//SERVIDOR
 
 //CONFIGURAR EXPRESS
 const express = require('express')
@@ -82,6 +120,8 @@ nunjucks.configure('src/views', {
     express: server,
     noCache: true,
 })
+
+//INICIO E CONFIGURAÇÃO DO SERVIDOR
 
 server
 
@@ -102,6 +142,8 @@ server
 .get("/study", pageStudy)//No ".get" o primeiro campo é sobre como vai estar o html, nessa caso "http://127.0.0.1:5500/study" e o segundo é a função do que vai mostrar quando estiver nessa página
 
 .get("/give-classes", pageGiveClasses)
+
+//START DO SERVIDOR
 
 .listen(5500)//express é uma função por isso precisa dos parenteses
 // // //a gente abriu a porta 5500,quando colocamos ali em cima, então se eu tentar acessar com outra porta, tipo 5501, eu não conseguiria
