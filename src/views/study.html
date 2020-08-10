@@ -67,33 +67,37 @@
 
             <main> <!--conteúdo principal da página-->
 
-                {%for proffy in proffys %}<!--A leitura é feita assim: PARA UM PROFFY DAQUELAS LISTA PROFFYS-->
-                <!--Fazer a repetição para mostrar cada professor ao invés de ir um por um-->
-                    <article class="teacher-item"> <!--vai repetir o que está dentro dele várias e várias vezes-->
-                    <header>
-                        <img 
-                            src="{{proffy.avatar}}" 
-                            alt="{{proffy.nome}}">
-                        <div>
-                            <strong>{{proffy.name}}</strong>
-                            <span>{{proffy.subject}}</span>
-                        </div>
-                    </header>
-                
-                    <p>{{proffy.bio}}</p>
-                
-                    <footer>
-                        <p>Preço/hora<strong>R$ {{proffy.cost}}</strong>
-                        </p>
-                        <!-- <button type="button">
-                            <img src="images/images/icons/whatsapp.svg" alt="Whatsapp">Entrar em contato
-                        </button> --> <!--TUDO ISSO VAI SER SUBSTITUIDO POR...-->
-                            <a href="https://api.whatsapp.com/send?1=pt_BR&phone=55{{proffy.whatsapp}}&text=Tenho interesse na sua aula de {{proffy.subject}} {{proffy.name}}" class="button" target="_blanck">
-                                <img src="images/images/icons/whatsapp.svg" alt="Whatsapp">Entrar em Contato
-                            </a> 
-                    </footer>
-                </article>
-                {%endfor%}
+                {%if proffys == "" %}
+                    <p class="no-results">Nenhum professor encontrado com sua pesquisa</p>
+                {%else%}
+                    {%for proffy in proffys %}<!--A leitura é feita assim: PARA UM PROFFY DAQUELAS LISTA PROFFYS-->
+                    <!--Fazer a repetição para mostrar cada professor ao invés de ir um por um-->
+                        <article class="teacher-item"> <!--vai repetir o que está dentro dele várias e várias vezes-->
+                        <header>
+                            <img 
+                                src="{{proffy.avatar}}" 
+                                alt="{{proffy.nome}}">
+                            <div>
+                                <strong>{{proffy.name}}</strong>
+                                <span>{{proffy.subject}}</span>
+                            </div>
+                        </header>
+                    
+                        <p>{{proffy.bio}}</p>
+                    
+                        <footer>
+                            <p>Preço/hora<strong>R$ {{proffy.cost}}</strong>
+                            </p>
+                            <!-- <button type="button">
+                                <img src="images/images/icons/whatsapp.svg" alt="Whatsapp">Entrar em contato
+                            </button> --> <!--TUDO ISSO VAI SER SUBSTITUIDO POR...-->
+                                <a href="https://api.whatsapp.com/send?1=pt_BR&phone=55{{proffy.whatsapp}}&text=Tenho interesse na sua aula de {{proffy.subject}} {{proffy.name}}" class="button" target="_blanck">
+                                    <img src="images/images/icons/whatsapp.svg" alt="Whatsapp">Entrar em Contato
+                                </a> 
+                        </footer>
+                        </article>
+                    {%endfor%}
+                {%endif%}
             </main>
         </div>
 

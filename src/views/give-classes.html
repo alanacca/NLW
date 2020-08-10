@@ -42,7 +42,7 @@
             </header>
 
             <main> <!--conteúdo principal da página-->
-               <form action="" id="create-classes">
+               <form action="/save-classes" id="create-classes" method = "POST"> <!--O método POST esconde os dados colocados no formulario. Se você tentar fazer um formulario sem especificar o método POST, ele vai automaticamento utilizar o método GET que deixa as informações preenchidas no formulário, a mostra na url depois de clicar no botão submit-->
                    <fieldset>
                        <legend>Seus dados</legend>
 
